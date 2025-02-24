@@ -9,7 +9,7 @@ CREATE TABLE czesci_samochodowe (
     ilosc_magazynowa INT NOT NULL DEFAULT 0,
     data_dodania TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
---- DODANIE KOLEJNEJ TABLEI ORAZ ŁĄCZENIE ---
+--- DODANIE KOLEJNEJ TABELI ORAZ ŁĄCZENIE ---
 
 CREATE TABLE zamowienia (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -29,7 +29,12 @@ SELECT AVG(cena) AS srednia_cena FROM czesci_samochodowe;
 --- WYKLUCZANIE BŁĘDÓW PRZEZ USUNIĘCIE NULL ---
 
 SELECT id, nazwa, NVL(cena, 0) AS cena_bez_null FROM czesci_samochodowe;
-
-
-
 );
+--- DODANA KOLUMNA CZAS REALIZACJI USŁUGI ---
+ALTER TABLE czesci_samochodowe
+ADD COLUMN czas_realizacji INT;
+
+--- UŚREDNIENIE---
+SELECT AVG(czas_realizacji) AS sredni_czas_realizacji
+FROM uslugi;
+
