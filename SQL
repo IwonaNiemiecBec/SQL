@@ -1,4 +1,5 @@
 --- TWORZENIE TABEL OD PODSTAW ---
+
 CREATE TABLE czesci_samochodowe (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nazwa VARCHAR(255) NOT NULL,
@@ -7,4 +8,28 @@ CREATE TABLE czesci_samochodowe (
     cena DECIMAL(10,2) NOT NULL,
     ilosc_magazynowa INT NOT NULL DEFAULT 0,
     data_dodania TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+--- DODANIE KOLEJNEJ TABLEI ORAZ ŁĄCZENIE ---
+
+CREATE TABLE zamowienia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_czesci INT NOT NULL,
+    ilosc_zamowiona INT NOT NULL,
+    data_zamowienia TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_czesci) REFERENCES czesci_samochodowe(id) ON DELETE CASCADE
+
+--- SORTOWANIE DANYCH - WIZUALIZACJA ---
+SELECT * FROM czesci_samochodowe ORDER BY nazwa ASC;
+SELECT * FROM zamowienia ORDER BY data_zamowienia DESC;
+
+--- UŚREDNIANIE ---
+
+SELECT AVG(cena) AS srednia_cena FROM czesci_samochodowe;
+
+--- WYKLUCZANIE BŁĘDÓW PRZEZ USUNIĘCIE NULL ---
+
+SELECT id, nazwa, NVL(cena, 0) AS cena_bez_null FROM czesci_samochodowe;
+
+
+
 );
