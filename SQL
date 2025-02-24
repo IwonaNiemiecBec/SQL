@@ -1,0 +1,9 @@
+CREATE TABLE czesci_samochodowe (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nazwa VARCHAR(255) NOT NULL,
+    producent VARCHAR(255) NOT NULL,
+    numer_katalogowy VARCHAR(50) UNIQUE NOT NULL,
+    cena DECIMAL(10,2) NOT NULL,
+    ilosc_magazynowa INT NOT NULL DEFAULT 0,
+    data_dodania TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
